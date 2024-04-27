@@ -294,8 +294,8 @@ with webdriver.Chrome() as browser:
     browser.get(url)
 
     # Нахождение элемента выпадающего списка
-    for element in browser.find_elements(By.ID, "opt"):
-
+    for element in browser.find_elements(By.TAG_NAME, 'option'):
+        values = element.text
 
 
     # dropdown = browser.find_elements(By.ID, "opt")
