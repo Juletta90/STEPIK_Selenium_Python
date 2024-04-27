@@ -288,30 +288,64 @@ from selenium.webdriver.support.select import Select
 Получение Конечного Результата: Копируйте длинное число, которое появится после нажатия на кнопку.
 """
 
-url = 'https://parsinger.ru/selenium/7/7.html'
+
+# МОЙ ВАРИАНТ
+# url = 'https://parsinger.ru/selenium/7/7.html'
+# with webdriver.Chrome() as browser:
+#     wait = WebDriverWait(browser, 15)
+#     browser.get(url)
+#
+#     sum_val = 0
+#     # Нахождение элемента выпадающего списка
+#     for element in browser.find_elements(By.TAG_NAME, 'option'):
+#         values = element.text
+#         sum_val += int(values)
+#     print(sum_val)
+#
+#     input_text = browser.find_element(By.ID, "input_result")
+#     input_text.send_keys(sum_val)
+#
+#     wait.until(ec.element_to_be_clickable(browser.find_element(
+#         By.CLASS_NAME, "btn"))).click()
+#
+#     res = browser.find_element(By.TAG_NAME, "p").text
+#     print(res)
+
+
+# Вариант 2
+# with webdriver.Chrome() as browser:
+#     browser.get('http://parsinger.ru/selenium/7/7.html')
+#     result = 0
+#     for el in browser.find_elements(By.TAG_NAME, 'option'):
+#         result += int(el.text)
+#     browser.find_element(By.ID, 'input_result').send_keys(result)
+#     browser.find_element(By.CLASS_NAME, 'btn').click()
+#     print(browser.find_element(By.ID, 'result').text)
+
+# Вариант 3
+# with webdriver.Chrome() as browser:
+#     browser.get('https://parsinger.ru/selenium/7/7.html')
+#     num = sum([int(x.text) for x in browser.find_elements(By.TAG_NAME, "option")])
+#     browser.find_element(By.TAG_NAME, 'input').send_keys(num)
+#     browser.find_element(By.CLASS_NAME, 'btn_box').click()
+#     browser.find_element(By.ID, 'result').text
+#     time.sleep(5)
+
+
+
+
+""" Задача 8   Миссия "Загадочный След"
+Откройте Таинственную Страницу: Используя Selenium, откройте веб-страницу, где хранится первая подсказка.
+Решение Загадки: Найдите значение математического уравнения.
+                ((12434107696*3)*2)+1
+Ключ к Выпадающему Списку: Откройте выпадающий список и выберите элемент с числом, которое у вас получилось на предыдущем этапе.
+Активация Механизма: Нажмите на кнопку на странице, если значение верное, вы получите код.
+Завершение Миссии: Скопируйте число, которое появится на странице после нажатия на кнопку, и вставьте его в поле ответа степик.
+"""
+
+url = 'https://parsinger.ru/selenium/6/6.html'
 with webdriver.Chrome() as browser:
     wait = WebDriverWait(browser, 15)
     browser.get(url)
 
-    # Нахождение элемента выпадающего списка
-    for element in browser.find_elements(By.TAG_NAME, 'option'):
-        values = element.text
-
-
-    # dropdown = browser.find_elements(By.ID, "opt")
-    # sum_val = 0
-    # for element in dropdown:
-    #     # Создание объекта класса Select
-    #     select = Select(dropdown)
-    #     #sum_val = sum_val + val
-    # #print(sum_val)
-
-    # input_text = browser.find_element(By.ID, "input_result")
-    # input_text.send_keys(sum_val)
-
-    wait.until(ec.element_to_be_clickable(browser.find_element(
-        By.CLASS_NAME, "btn"))).click()
-
-    res = browser.find_element(By.TAG_NAME, "p").text
-    print(res)
-
+    browser.find_element(By.ID, 'text_box').text
