@@ -343,9 +343,38 @@ from selenium.webdriver.support.select import Select
 Завершение Миссии: Скопируйте число, которое появится на странице после нажатия на кнопку, и вставьте его в поле ответа степик.
 """
 
+# МОЙ ВАРИАНТ
 url = 'https://parsinger.ru/selenium/6/6.html'
 with webdriver.Chrome() as browser:
     wait = WebDriverWait(browser, 15)
     browser.get(url)
 
-    browser.find_element(By.ID, 'text_box').text
+    txt_bx = browser.find_element(By.XPATH, '//*[@id="text_box"]')
+    result = eval(txt_bx.text)
+    print(result)  # вывод решения уравнения - 74604646177
+
+    # Поиск значения 74604646177 в выпадающем списке
+    for element in browser.find_elements(
+             By.CSS_SELECTOR, 'select'):
+        se = Select(element)
+        se.select_by_visible_text(str(result))
+        element.click()
+
+    # Поиск кнопки "отправить"
+    wait.until(ec.element_to_be_clickable(browser.find_element(
+        By.CLASS_NAME, 'btn'))).click()
+    time.sleep(5)
+
+    res = browser.find_element(By.ID, 'result')
+    print(res.text)  # вывод числа, после нажатия на кнопку - 98763216843164361841357461685743168461
+
+
+# 2 вариант
+with webdriver.Chrome() as browser:
+    n = 12434107696*6 + 1
+    browser.get('http://parsinger.ru/selenium/6/6.html')
+    browser.find_element(By.TAG_NAME, 'select').send_keys(str(n))
+    browser.find_element(By.CLASS_NAME, 'btn').click()
+    print(browser.find_element(By.ID, 'result').text)
+
+
